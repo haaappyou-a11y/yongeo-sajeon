@@ -4,48 +4,48 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>용어 사전</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link id="favicon" rel="icon" type="image/png" href="" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
   :root {
-    --paper: #f5f2ea;
-    --paper-elevated: #fffdf7;
-    --ink: #26231d;
-    --ink-muted: #756e5e;
-    --rule: #ddd5c2;
-    --rule-soft: #e9e3d4;
-    --accent: #2f4a4a;
-    --accent-soft: #e7ede9;
-    --accent-line: #8fada8;
-    --shadow: 0 1px 2px rgba(38,35,29,0.05), 0 4px 14px rgba(38,35,29,0.05);
-    --font-display: 'Gowun Batang', 'Noto Serif KR', serif;
-    --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    --paper: #ffffff;
+    --paper-elevated: #ffffff;
+    --ink: #2a2925;
+    --ink-muted: #8a8576;
+    --rule: #e7e1d0;
+    --rule-soft: #f1ede2;
+    --accent: #7c8c72;
+    --accent-soft: #eef1e7;
+    --accent-line: #a9b89e;
+    --shadow: 0 1px 2px rgba(42,41,37,0.05), 0 4px 14px rgba(42,41,37,0.05);
+    --font-display: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #1a1815;
-      --paper-elevated: #22201b;
-      --ink: #ece7da;
-      --ink-muted: #9d9583;
-      --rule: #3a362c;
-      --rule-soft: #2c2921;
-      --accent: #9dc2bb;
-      --accent-soft: #232b29;
-      --accent-line: #4d635f;
+      --paper: #171613;
+      --paper-elevated: #1e1d19;
+      --ink: #ece7db;
+      --ink-muted: #9b9686;
+      --rule: #34322a;
+      --rule-soft: #29271f;
+      --accent: #a3b897;
+      --accent-soft: #242a22;
+      --accent-line: #5c6b54;
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.3);
     }
   }
   :root[data-theme="dark"] {
-    --paper: #1a1815;
-    --paper-elevated: #22201b;
-    --ink: #ece7da;
-    --ink-muted: #9d9583;
-    --rule: #3a362c;
-    --rule-soft: #2c2921;
-    --accent: #9dc2bb;
-    --accent-soft: #232b29;
-    --accent-line: #4d635f;
+    --paper: #171613;
+    --paper-elevated: #1e1d19;
+    --ink: #ece7db;
+    --ink-muted: #9b9686;
+    --rule: #34322a;
+    --rule-soft: #29271f;
+    --accent: #a3b897;
+    --accent-soft: #242a22;
+    --accent-line: #5c6b54;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.3);
   }
   * { box-sizing: border-box; }
@@ -473,6 +473,88 @@ document.getElementById('overlay').addEventListener('click', (e) => {
 document.getElementById('search').addEventListener('input', renderGrid);
 
 load();
+
+// --- 애니메이션 파비콘: 책 아이콘 + 반짝이는 별 ---
+(function animateFavicon() {
+  const SIZE = 32;
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+  const ctx = canvas.getContext('2d');
+  const link = document.getElementById('favicon');
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function drawFrame(t) {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+
+    // 배경: 살짝 둥근 베이지 배지
+    const r = 8;
+    ctx.fillStyle = '#f6f1e2';
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.arcTo(SIZE, 0, SIZE, SIZE, r);
+    ctx.arcTo(SIZE, SIZE, 0, SIZE, r);
+    ctx.arcTo(0, SIZE, 0, 0, r);
+    ctx.arcTo(0, 0, SIZE, 0, r);
+    ctx.closePath();
+    ctx.fill();
+
+    // 책: 펼쳐진 두 페이지 (세이지 그린)
+    const cx = 15, topY = 9, botY = 24;
+    ctx.fillStyle = '#7c8c72';
+    ctx.beginPath();
+    ctx.moveTo(cx, topY + 1);
+    ctx.lineTo(5, topY + 4);
+    ctx.lineTo(5, botY - 1);
+    ctx.lineTo(cx, botY - 3);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(cx, topY + 1);
+    ctx.lineTo(25, topY + 4);
+    ctx.lineTo(25, botY - 1);
+    ctx.lineTo(cx, botY - 3);
+    ctx.closePath();
+    ctx.fill();
+    // 책등
+    ctx.strokeStyle = '#5c6b54';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(cx, topY + 1);
+    ctx.lineTo(cx, botY - 3);
+    ctx.stroke();
+
+    // 반짝이는 별 (오른쪽 위, pulse)
+    const twinkle = prefersReduced ? 0.85 : 0.55 + 0.45 * Math.abs(Math.sin(t * Math.PI * 2));
+    const sx = 25, sy = 7, sLen = 3.2 * twinkle;
+    ctx.strokeStyle = `rgba(201, 162, 39, ${0.5 + 0.5 * twinkle})`;
+    ctx.lineWidth = 1.3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(sx - sLen, sy);
+    ctx.lineTo(sx + sLen, sy);
+    ctx.moveTo(sx, sy - sLen);
+    ctx.lineTo(sx, sy + sLen);
+    ctx.stroke();
+
+    link.href = canvas.toDataURL('image/png');
+  }
+
+  if (prefersReduced) {
+    drawFrame(0.25);
+    return;
+  }
+
+  let start = null;
+  const DURATION = 1400;
+  function tick(now) {
+    if (!start) start = now;
+    const t = ((now - start) % DURATION) / DURATION;
+    drawFrame(t);
+    setTimeout(() => requestAnimationFrame(tick), 90);
+  }
+  requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
