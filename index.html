@@ -506,15 +506,15 @@ load();
     const lensR = 7.8;
 
     ctx.strokeStyle = '#173420';
-    ctx.lineWidth = 4.725;
+    ctx.lineWidth = 2.835;
     ctx.lineCap = 'round';
 
     // 손잡이 (항상 오른쪽 아래 방향, 45도)
     const handleAngle = Math.PI / 4;
     const hx1 = glassCx + Math.cos(handleAngle) * lensR;
     const hy1 = glassCy + Math.sin(handleAngle) * lensR;
-    const hx2 = glassCx + Math.cos(handleAngle) * (lensR + 6.75);
-    const hy2 = glassCy + Math.sin(handleAngle) * (lensR + 6.75);
+    const hx2 = glassCx + Math.cos(handleAngle) * (lensR + 9.45);
+    const hy2 = glassCy + Math.sin(handleAngle) * (lensR + 9.45);
     ctx.beginPath();
     ctx.moveTo(hx1, hy1);
     ctx.lineTo(hx2, hy2);
