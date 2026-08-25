@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>용어 사전</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5f2ea;
+    --paper-elevated: #fffdf7;
+    --ink: #26231d;
+    --ink-muted: #756e5e;
+    --rule: #ddd5c2;
+    --rule-soft: #e9e3d4;
+    --accent: #2f4a4a;
+    --accent-soft: #e7ede9;
+    --accent-line: #8fada8;
+    --shadow: 0 1px 2px rgba(38,35,29,0.05), 0 4px 14px rgba(38,35,29,0.05);
+    --font-display: 'Gowun Batang', 'Noto Serif KR', serif;
+    --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1a1815;
+      --paper-elevated: #22201b;
+      --ink: #ece7da;
+      --ink-muted: #9d9583;
+      --rule: #3a362c;
+      --rule-soft: #2c2921;
+      --accent: #9dc2bb;
+      --accent-soft: #232b29;
+      --accent-line: #4d635f;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1a1815;
+    --paper-elevated: #22201b;
+    --ink: #ece7da;
+    --ink-muted: #9d9583;
+    --rule: #3a362c;
+    --rule-soft: #2c2921;
+    --accent: #9dc2bb;
+    --accent-soft: #232b29;
+    --accent-line: #4d635f;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 22px 90px;
+  }
+  header.page {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 22px;
+    margin-bottom: 26px;
+  }
+  header.page .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  header.page h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  header.page p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 24px 0 22px;
+  }
+  #search {
+    flex: 1;
+    min-width: 200px;
+    padding: 11px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    background: var(--paper-elevated);
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  #search::placeholder { color: var(--ink-muted); }
+  #search:focus { outline: 2px solid var(--accent-line); outline-offset: -1px; }
+  .chip {
+    padding: 7px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--rule);
+    background: var(--paper-elevated);
+    color: var(--ink-muted);
+    font-size: 0.82rem;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .chip:hover { border-color: var(--accent-line); }
+  .chip.active {
+    background: var(--accent);
+    color: var(--paper-elevated);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .count {
+    color: var(--ink-muted);
+    font-size: 0.8rem;
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card {
+    background: var(--paper-elevated);
+    padding: 18px 18px 16px;
+    cursor: pointer;
+    transition: background .12s ease;
+  }
+  .card:hover { background: var(--accent-soft); }
+  .card .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 9px;
+  }
+  .card .tag::before { content: "["; }
+  .card .tag::after { content: "]"; }
+  .card h3 {
+    font-family: var(--font-display);
+    margin: 0 0 7px;
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+  .card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .empty {
+    text-align: center;
+    color: var(--ink-muted);
+    padding: 70px 20px;
+    font-size: 0.9rem;
+    border: 1px dashed var(--rule);
+    border-radius: 10px;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,18,14,0.5);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 16px;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  .overlay.hidden { display: none; }
+  .detail {
+    background: var(--paper-elevated);
+    border-radius: 4px;
+    max-width: 620px;
+    width: 100%;
+    padding: 34px 34px 36px;
+    box-shadow: 0 24px 60px rgba(20,18,14,0.28);
+    border-top: 3px solid var(--accent);
+  }
+  .detail-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .detail .tag {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .detail .tag::before { content: "["; }
+  .detail .tag::after { content: "]"; }
+  .detail h2 {
+    font-family: var(--font-display);
+    margin: 0 0 4px;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+  .close-btn {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink-muted);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .close-btn:hover { color: var(--ink); border-color: var(--accent-line); }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 24px 0 9px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .detail .oneliner {
+    font-size: 1.02rem;
+    font-weight: 500;
+    margin-top: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .detail .explanation {
+    font-size: 0.93rem;
+    line-height: 1.8;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+  .related-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .related-pill {
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    font-size: 0.83rem;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .related-pill:hover { border-color: var(--accent-line); color: var(--accent); }
+  .source-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .source-list li {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+  .source-list a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-line);
+  }
+  .source-list a:hover { opacity: 0.75; }
+  .source-list .domain {
+    color: var(--ink-muted);
+    font-size: 0.78rem;
+  }
+  svg.diagram { width: 100%; height: auto; margin-top: 4px; }
+  svg.diagram text { font-family: var(--font-body); }
+  svg.diagram .edge { stroke: var(--rule); stroke-width: 1.5; }
+  svg.diagram .node-center circle { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+  svg.diagram .node-center text { fill: var(--accent); font-weight: 700; }
+  svg.diagram .node-related circle { fill: var(--paper-elevated); stroke: var(--rule); stroke-width: 1.5; cursor: pointer; }
+  svg.diagram .node-related text { fill: var(--ink); font-weight: 500; cursor: pointer; }
+  svg.diagram .node-related:hover circle { stroke: var(--accent-line); }
+  .meta-date { color: var(--ink-muted); font-size: 0.75rem; margin-top: 22px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <div class="eyebrow">GLOSSARY — 계속 쌓이는 중</div>
+    <h1>용어 사전</h1>
+    <p>모르는 단어를 던지면, 배경과 관계를 정리해서 여기에 쌓아둡니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <input id="search" type="text" placeholder="용어 검색..." />
+    <div id="chips" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none;">해당하는 용어가 없어요.</div>
+</div>
+
+<div class="overlay hidden" id="overlay">
+  <div class="detail" id="detail"></div>
+</div>
+
+<script>
+let TERMS = [];
+let activeCategory = 'all';
+
+async function load() {
+  const res = await fetch('terms.json', { cache: 'no-store' });
+  TERMS = await res.json();
+  renderChips();
+  renderGrid();
+}
+
+function renderChips() {
+  const cats = ['all', ...new Set(TERMS.map(t => t.category))];
+  const chips = document.getElementById('chips');
+  chips.innerHTML = cats.map(c =>
+    `<button class="chip ${c === activeCategory ? 'active' : ''}" data-cat="${c}">${c === 'all' ? '전체' : c}</button>`
+  ).join('');
+  chips.querySelectorAll('.chip').forEach(el => {
+    el.addEventListener('click', () => {
+      activeCategory = el.dataset.cat;
+      renderChips();
+      renderGrid();
+    });
+  });
+}
+
+function currentFiltered() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  return TERMS.filter(t => {
+    const matchesCat = activeCategory === 'all' || t.category === activeCategory;
+    const matchesQ = !q || t.term.toLowerCase().includes(q) || (t.oneLiner || '').toLowerCase().includes(q);
+    return matchesCat && matchesQ;
+  });
+}
+
+function renderGrid() {
+  const list = currentFiltered();
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  document.getElementById('count').textContent = `${list.length}개`;
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  grid.innerHTML = list.map(t => `
+    <div class="card" data-id="${t.id}">
+      <span class="tag">${t.category}</span>
+      <h3>${t.term}</h3>
+      <p>${t.oneLiner || ''}</p>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.card').forEach(el => {
+    el.addEventListener('click', () => openDetail(el.dataset.id));
+  });
+}
+
+function findTerm(idOrName) {
+  return TERMS.find(t => t.id === idOrName || t.term === idOrName);
+}
+
+function buildDiagram(term) {
+  const related = (term.related || []).map(r => findTerm(r) || { id: r, term: r, category: '' }).filter(Boolean);
+  if (!related.length) return '';
+  const W = 560, H = 220, cx = W / 2, cy = H / 2;
+  const n = related.length;
+  const radius = Math.min(200, 90 + n * 14);
+  let nodes = '';
+  let edges = '';
+  related.forEach((r, i) => {
+    const angle = (2 * Math.PI * i) / n - Math.PI / 2;
+    const x = cx + radius * Math.cos(angle);
+    const y = cy + radius * Math.sin(angle) * 0.62;
+    edges += `<line class="edge" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" />`;
+    const label = r.term.length > 8 ? r.term.slice(0, 7) + '…' : r.term;
+    nodes += `<g class="node-related" data-id="${r.id}" transform="translate(${x},${y})">
+      <circle r="34" />
+      <text x="0" y="5" text-anchor="middle" font-size="12">${label}</text>
+    </g>`;
+  });
+  const centerLabel = term.term.length > 8 ? term.term.slice(0, 7) + '…' : term.term;
+  return `<svg class="diagram" viewBox="0 0 ${W} ${H}">
+    ${edges}
+    ${nodes}
+    <g class="node-center" transform="translate(${cx},${cy})">
+      <circle r="40" />
+      <text x="0" y="5" text-anchor="middle" font-size="13">${centerLabel}</text>
+    </g>
+  </svg>`;
+}
+
+function openDetail(id) {
+  const t = findTerm(id);
+  if (!t) return;
+  const diagram = buildDiagram(t);
+  document.getElementById('detail').innerHTML = `
+    <div class="detail-top">
+      <div>
+        <span class="tag">${t.category}</span>
+        <h2>${t.term}</h2>
+      </div>
+      <button class="close-btn" id="closeBtn" aria-label="닫기">✕</button>
+    </div>
+    <div class="oneliner">${t.oneLiner || ''}</div>
+    <div class="section-label">배경 · 설명</div>
+    <div class="explanation">${t.explanation || ''}</div>
+    ${diagram ? `<div class="section-label">관련 용어 관계도</div>${diagram}` : ''}
+    ${(t.related || []).length ? `<div class="section-label">관련 용어</div>
+      <div class="related-list">
+        ${t.related.map(r => {
+          const rt = findTerm(r);
+          return `<span class="related-pill" data-id="${rt ? rt.id : r}">${rt ? rt.term : r}</span>`;
+        }).join('')}
+      </div>` : ''}
+    ${(t.sources || []).length ? `<div class="section-label">출처</div>
+      <ul class="source-list">
+        ${t.sources.map(s => {
+          let domain = '';
+          try { domain = new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) {}
+          return `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.title}</a> ${domain ? `<span class="domain">— ${domain}</span>` : ''}</li>`;
+        }).join('')}
+      </ul>` : ''}
+    <div class="meta-date">${t.addedAt ? '추가일 ' + t.addedAt : ''}</div>
+  `;
+  document.getElementById('overlay').classList.remove('hidden');
+  document.getElementById('closeBtn').addEventListener('click', closeDetail);
+  document.querySelectorAll('.node-related, .related-pill').forEach(el => {
+    el.addEventListener('click', () => openDetail(el.dataset.id));
+  });
+}
+
+function closeDetail() {
+  document.getElementById('overlay').classList.add('hidden');
+}
+
+document.getElementById('overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'overlay') closeDetail();
+});
+document.getElementById('search').addEventListener('input', renderGrid);
+
+load();
+</script>
+</body>
+</html>
